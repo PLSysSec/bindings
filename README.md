@@ -26,6 +26,16 @@ We originally ran the checkers on a node [version from early September
 and Chrome [version 56.0.2915.0 (Developer
 build)](https://github.com/nodejs/node/commit/0e6c3360317ea7c5c7cc242dfb5c61c359493f34).
 We omit any files that have been removed (e.g., due to refactoring) from more
-recent versions of the runtimes---node 7.7.4 and Chrome 56.0.2924.87---to
+recent versions of the runtimes (node 7.7.4 and Chrome 56.0.2924.87)  to
 simplify the bug reporting process. Most of the node bugs can be triggered for
 [node-chakracore](https://github.com/nodejs/node-chakracore) as well.
+
+We will periodically update this repository with the source for exploits we
+used to trigger flagged bugs and (soon) with the flagged data itself.
+
+We developed a [Safe V8
+API](https://github.com/PLSysSec/node/blob/safev8/SafeAPI_Docs.md) to address
+the classes of bugs that arise due to the binding layer and [ported node to
+this safe API](https://github.com/PLSysSec/node). This API is backwards
+compatible (it doesn't break Node.js' tests nor the CITGM tests) and imposes
+little to no overhead (according to the node benchmarks).
