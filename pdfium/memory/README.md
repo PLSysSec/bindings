@@ -1,0 +1,2 @@
+- [679642: Use after free in PDFium's Field::page](https://bugs.chromium.org/p/chromium/issues/detail?id=679642)
+- [679643: Use after free in PDFium's Annot::name](https://bugs.chromium.org/p/chromium/issues/detail?id=679643)

