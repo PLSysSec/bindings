@@ -1,0 +1,1 @@
+process.binding('buffer').createFromString()
